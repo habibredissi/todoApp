@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Task::class, function (Faker $faker) {
+$factory->define(App\Lists::class, function (Faker $faker) {
     return [
         //
     ];
