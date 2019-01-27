@@ -51123,7 +51123,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    list_id: 1
+    list_id: null
   },
   mutations: {
     changeListId: function changeListId(state, listId) {
