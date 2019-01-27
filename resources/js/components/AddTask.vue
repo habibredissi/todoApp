@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-1">
+  <div>
     <form @submit.prevent="addTodo">
       <input
         type="text"
