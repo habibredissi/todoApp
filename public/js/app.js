@@ -1925,15 +1925,19 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       this.$store.commit("changeListId", listId);
     },
     addlist: function addlist(newList) {
-      axios.post("/api/lists", {
+      var _this2 = this;
+
+      var list2add = axios.post("/api/lists", {
         title: newList.title,
         user_id: newList.user_id
       }).then(function (response) {
-        console.log(response.data);
+        return response.data;
       }).catch(function (error) {
         console.log(error.response.data);
       });
-      this.lists = [].concat(_toConsumableArray(this.lists), [newList]);
+      list2add.then(function (value) {
+        _this2.lists = [].concat(_toConsumableArray(_this2.lists), [value]);
+      });
     },
     deleteListItem: function deleteListItem(id, index) {
       this.$delete(this.lists, index);
