@@ -51,19 +51,21 @@ export default {
       this.$store.commit("changeListId", listId);
     },
     addlist(newList) {
-      axios
+      let list2add = axios
         .post("/api/lists", {
           title: newList.title,
           user_id: newList.user_id
         })
         .then(function(response) {
-          console.log(response.data);
+          return response.data;
         })
         .catch(function(error) {
           console.log(error.response.data);
         });
 
-      this.lists = [...this.lists, newList];
+      list2add.then(value => {
+        this.lists = [...this.lists, value];
+      });
     },
     deleteListItem(id, index) {
       this.$delete(this.lists, index);
