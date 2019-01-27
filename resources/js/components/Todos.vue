@@ -54,20 +54,22 @@ export default {
         });
     },
     addtask(newTask) {
-      axios
+      let newTaskToAdd = axios
         .post("/api/tasks", {
           title: newTask.title,
           done: newTask.done,
           list_id: newTask.list_id
         })
         .then(function(response) {
-          console.log(response.data);
+          return response.data;
         })
         .catch(function(error) {
           console.log(error.response.data);
         });
 
-      this.todos = [...this.todos, newTask];
+      newTaskToAdd.then(value => {
+        this.todos = [...this.todos, value];
+      });
     }
   }
 };
@@ -82,5 +84,10 @@ export default {
 body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
+}
+
+.btn,
+.form-control {
+  border-radius: 0;
 }
 </style>

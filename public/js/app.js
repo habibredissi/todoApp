@@ -2107,16 +2107,20 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
       });
     },
     addtask: function addtask(newTask) {
-      axios.post("/api/tasks", {
+      var _this2 = this;
+
+      var newTaskToAdd = axios.post("/api/tasks", {
         title: newTask.title,
         done: newTask.done,
         list_id: newTask.list_id
       }).then(function (response) {
-        console.log(response.data);
+        return response.data;
       }).catch(function (error) {
         console.log(error.response.data);
       });
-      this.todos = [].concat(_toConsumableArray(this.todos), [newTask]);
+      newTaskToAdd.then(function (value) {
+        _this2.todos = [].concat(_toConsumableArray(_this2.todos), [value]);
+      });
     }
   }
 });
@@ -6432,7 +6436,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\n}\nbody {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  line-height: 1.4;\n}\n.list-item {\r\n  padding: 10px;\r\n  background: darkgrey;\r\n  color: white;\r\n  font-weight: bold;\r\n  letter-spacing: 2px;\r\n  margin-top: 2px;\n}\n.deleteIcon {\r\n  float: right;\n}\r\n", ""]);
+exports.push([module.i, "\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\r\n  font-size: 16px;\n}\nbody {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  line-height: 1.4;\n}\n.list-item {\r\n  padding: 10px;\r\n  background: darkgrey;\r\n  color: white;\r\n  font-weight: bold;\r\n  letter-spacing: 2px;\r\n  margin-top: 2px;\r\n  cursor: pointer;\n}\n.deleteIcon {\r\n  float: right;\n}\n.title {\r\n  text-transform: uppercase;\r\n  font-weight: bold;\r\n  font-size: 18px;\r\n  color: dimgrey;\n}\r\n", ""]);
 
 // exports
 
@@ -6451,7 +6455,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.todo-item[data-v-263df564] {\r\n  background: #f4f4f4;\r\n  padding: 10px;\r\n  border-bottom: 1px #ccc dotted;\n}\n.is-complete[data-v-263df564] {\r\n  text-decoration: line-through;\n}\n.del[data-v-263df564] {\r\n  background: #ff0000;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0px 5px;\r\n  border-radius: 50%;\r\n  cursor: pointer;\r\n  float: right;\n}\n.hide[data-v-263df564] {\r\n  display: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.todo-item[data-v-263df564] {\r\n  background: #f4f4f4;\r\n  padding: 10px;\r\n  border-bottom: 1px #ccc dotted;\n}\n.is-complete[data-v-263df564] {\r\n  text-decoration: line-through;\n}\n.del[data-v-263df564] {\r\n  background: #ff0000;\r\n  color: #fff;\r\n  border: none;\r\n  padding: 0px 5px;\r\n  border-radius: 50%;\r\n  cursor: pointer;\r\n  float: right;\n}\n.hide[data-v-263df564] {\r\n  display: none;\n}\n.text[data-v-263df564] {\r\n  cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
@@ -6470,7 +6474,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\n}\nbody {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  line-height: 1.4;\n}\r\n", ""]);
+exports.push([module.i, "\n* {\r\n  box-sizing: border-box;\r\n  margin: 0;\r\n  padding: 0;\n}\nbody {\r\n  font-family: Arial, Helvetica, sans-serif;\r\n  line-height: 1.4;\n}\n.btn,\r\n.form-control {\r\n  border-radius: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -37880,7 +37884,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mb-1" }, [
+  return _c("div", [
     _c(
       "form",
       {
@@ -37952,7 +37956,9 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h3", [_vm._v("Select one of your lists")]),
+      _c("h3", { staticClass: "title" }, [
+        _vm._v("Tap on a list to show its tasks")
+      ]),
       _vm._v(" "),
       _vm._l(_vm.lists, function(list, index) {
         return _c("div", { key: list.id }, [

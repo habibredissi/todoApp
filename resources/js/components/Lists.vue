@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Select one of your lists</h3>
+    <h3 class="title">Tap on a list to show its tasks</h3>
     <div v-for="(list, index) in lists" v-bind:key="list.id">
       <div class="list-item" @click="loadList(list.id)">
         {{list.title}}
@@ -87,6 +87,7 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-size: 16px;
 }
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -99,8 +100,15 @@ body {
   font-weight: bold;
   letter-spacing: 2px;
   margin-top: 2px;
+  cursor: pointer;
 }
 .deleteIcon {
   float: right;
+}
+.title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  color: dimgrey;
 }
 </style>

@@ -105,4 +105,8 @@ export default {
 .hide {
   display: none;
 }
+
+.text {
+  cursor: pointer;
+}
 </style>
