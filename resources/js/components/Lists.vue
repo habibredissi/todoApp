@@ -38,10 +38,12 @@ export default {
   methods: {
     fetchTasks() {
       axios
-        .get("/api/lists")
+        .get("/api/lists/user/" + localStorage.getItem("user_id"))
         .then(response => {
           this.lists = response.data;
-          this.$store.commit("changeListId", this.lists[0].id);
+          if (response.data.lenth > 0) {
+            this.$store.commit("changeListId", this.lists[0].id);
+          }
         })
         .catch(error => {
           console.log(error);
@@ -54,7 +56,7 @@ export default {
       let list2add = axios
         .post("/api/lists", {
           title: newList.title,
-          user_id: newList.user_id
+          user_id: localStorage.getItem("user_id")
         })
         .then(function(response) {
           return response.data;

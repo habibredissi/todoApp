@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        list_id: null
+        list_id: null,
     },
     mutations: {
         changeListId: (state, listId) => {

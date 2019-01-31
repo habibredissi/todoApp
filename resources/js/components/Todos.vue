@@ -36,7 +36,6 @@ export default {
         .get("/api/tasks")
         .then(response => {
           this.todos = response.data;
-          // this.todos = this.todos.filter(todo => todo.list_id === list_id);
         })
         .catch(error => {
           console.log(error);

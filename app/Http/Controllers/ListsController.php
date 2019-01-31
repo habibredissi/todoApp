@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Lists;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\Lists as ListsResource;
 
 class ListsController extends Controller
@@ -48,6 +49,19 @@ class ListsController extends Controller
     public function show(Lists $list)
     {
         return new ListsResource(Lists::find(2));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Lists  $user_list
+     * @return \Illuminate\Http\Response
+     */
+    public function user($user_list)
+    {
+        $lists = DB::table('lists')->where('user_id', '=', $user_list)->get();
+
+        return response($lists, 201);
     }
 
     /**

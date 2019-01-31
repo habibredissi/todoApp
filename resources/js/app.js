@@ -1,38 +1,46 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 import {
     store
 } from './store/store';
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import Router from './routes.js'
+import Auth from './packages/auth/Auth.js'
 
 Vue.component('navbar', require('./components/Navbar.vue').default);
 Vue.component('todos', require('./components/Todos.vue').default);
 Vue.component('addtask', require('./components/AddTask.vue').default);
 Vue.component('lists', require('./components/Lists.vue').default);
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(Auth);
+
+Router.beforeEach(
+    (to, from, next) => {
+        if (to.matched.some(record => record.meta.forVisitors)) {
+            if (Vue.auth.isAuthenticated()) {
+                next({
+                    path: '/'
+                })
+            } else {
+                next()
+            }
+        } else if (to.matched.some(record => record.meta.forAuth)) {
+            if (!Vue.auth.isAuthenticated()) {
+                next({
+                    path: '/login'
+                })
+            } else {
+                next()
+            }
+        } else {
+            next()
+        }
+    }
+)
 
 const app = new Vue({
     store: store,
-    el: '#app'
+    el: '#app',
+    router: Router
 });

@@ -21,13 +21,28 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
+        <li class="nav-item" v-if="!this.$auth.isAuthenticated()">
+          <router-link to="/login" class="nav-link">Login</router-link>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Register</a>
-        </li>-->
+        <li class="nav-item" v-if="!this.$auth.isAuthenticated()">
+          <router-link to="/register" class="nav-link">Register</router-link>
+        </li>
+        <li class="nav-item" v-if="this.$auth.isAuthenticated()" @click="logout">
+          <a href="#" class="nav-link">Logout</a>
+        </li>
       </ul>
     </div>
   </nav>
 </template>
+
+// <script>
+export default {
+  name: "Navbar",
+  methods: {
+    logout() {
+      this.$auth.destroyToken();
+      this.$router.push("/login");
+    }
+  }
+};
+</script>

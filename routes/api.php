@@ -25,6 +25,7 @@ Route::delete('/tasks/{task}', 'TasksController@destroy');
 
 // Routes for the lists API 
 Route::get('/lists', 'ListsController@index');
+Route::get('/lists/user/{user_list}', 'ListsController@user');
 Route::get('/lists/{list}', 'ListsController@show');
 Route::post('/lists', 'ListsController@store');
 Route::put('/lists/{list}', 'ListsController@update');
