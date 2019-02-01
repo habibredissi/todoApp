@@ -3,17 +3,17 @@ export default function (Vue) {
         setToken(token, expiration) {
             localStorage.setItem('token', token)
             localStorage.setItem('expiration', expiration)
-            axios.get('/api/user', {
-                    headers: {
-                        Authorization: 'Bearer '.concat(this.getToken())
-                    }
-                })
-                .then(response => {
-                    localStorage.setItem('user_id', response.data.id);
-                })
-                .catch((error) => {
-                    console.log('error ' + error);
-                });
+            // axios.get('/api/user', {
+            //         headers: {
+            //             Authorization: 'Bearer '.concat(this.getToken())
+            //         }
+            //     })
+            //     .then(response => {
+            //         localStorage.setItem('user_id', response.data.id);
+            //     })
+            //     .catch((error) => {
+            //         console.log('error ' + error);
+            //     });
         },
         getToken() {
             var token = localStorage.getItem('token')
