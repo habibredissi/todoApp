@@ -43,7 +43,7 @@ export default {
     markDone() {
       this.todoItem.done = !this.todoItem.done;
       axios
-        .put("http://188.166.159.80/api/tasks/" + this.todoItem.id, {
+        .put("/api/tasks/" + this.todoItem.id, {
           title: this.todoItem.title,
           done: this.todoItem.done
         })
@@ -68,7 +68,7 @@ export default {
 
       // However we want to save it to the database
       axios
-        .put("http://188.166.159.80/api/tasks/" + this.todoItem.id, {
+        .put("/api/tasks/" + this.todoItem.id, {
           title: this.todoItem.title,
           done: this.todoItem.done
         })

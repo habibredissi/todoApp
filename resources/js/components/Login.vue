@@ -62,7 +62,7 @@ export default {
       };
 
       let payload = axios
-        .post("http://188.166.159.80/oauth/token", data)
+        .post("/oauth/token", data)
         .then(function(response) {
           return response.data;
         })

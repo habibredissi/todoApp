@@ -33,7 +33,7 @@ export default {
   methods: {
     fetchTasks() {
       axios
-        .get("http://188.166.159.80/api/tasks")
+        .get("/api/tasks")
         .then(response => {
           this.todos = response.data;
         })
@@ -44,7 +44,7 @@ export default {
     deleteTask(index, id) {
       this.$delete(this.todos, index);
       axios
-        .delete("http://188.166.159.80/api/tasks/" + id)
+        .delete("/api/tasks/" + id)
         .then(response => {
           console.log(response);
         })
@@ -54,7 +54,7 @@ export default {
     },
     addtask(newTask) {
       let newTaskToAdd = axios
-        .post("http://188.166.159.80/api/tasks", {
+        .post("/api/tasks", {
           title: newTask.title,
           done: newTask.done,
           list_id: newTask.list_id

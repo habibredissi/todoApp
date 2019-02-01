@@ -38,7 +38,10 @@ export default {
   methods: {
     fetchTasks() {
       axios
-        .get("http://188.166.159.80/api/lists/user/" + localStorage.getItem("user_id"))
+        .get(
+          "/api/lists/user/" +
+            localStorage.getItem("user_id")
+        )
         .then(response => {
           this.lists = response.data;
           if (response.data.lenth > 0) {
@@ -54,7 +57,7 @@ export default {
     },
     addlist(newList) {
       let list2add = axios
-        .post("http://188.166.159.80/api/lists", {
+        .post("/api/lists", {
           title: newList.title,
           user_id: localStorage.getItem("user_id")
         })
@@ -72,7 +75,7 @@ export default {
     deleteListItem(id, index) {
       this.$delete(this.lists, index);
       axios
-        .delete("http://188.166.159.80/api/lists/" + id)
+        .delete("/api/lists/" + id)
         .then(response => {
           console.log(response);
         })

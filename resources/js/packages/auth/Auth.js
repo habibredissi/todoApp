@@ -4,7 +4,7 @@ export default function(Vue) {
             localStorage.setItem("token", token);
             localStorage.setItem("expiration", expiration);
             axios
-                .get("http://188.166.159.80/api/user", {
+                .get("/api/user", {
                     headers: {
                         Authorization: "Bearer ".concat(this.getToken())
                     }
