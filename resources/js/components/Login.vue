@@ -56,7 +56,7 @@ export default {
       let data = {
         grant_type: "password",
         client_id: 2,
-        client_secret: "z4Ik0dbrDuGRTj2oYyl1vUyKTrCw7IMTH2jOIrPU",
+        client_secret: "ZFN7aUPs8DMfw2zB9TNjwx0DpnwyytNXuTKK4I2W",
         username: this.username,
         password: this.password
       };
