@@ -3,7 +3,7 @@ export default function (Vue) {
         setToken(token, expiration) {
             localStorage.setItem('token', token)
             localStorage.setItem('expiration', expiration)
-            axios.get('http://localhost:8000/api/user', {
+            axios.get('/api/user', {
                     headers: {
                         Authorization: 'Bearer '.concat(this.getToken())
                     }
