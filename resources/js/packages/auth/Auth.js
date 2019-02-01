@@ -1,37 +1,39 @@
-export default function (Vue) {
+export default function(Vue) {
     Vue.auth = {
         setToken(token, expiration) {
-            localStorage.setItem('token', token)
-            localStorage.setItem('expiration', expiration)
-            axios.get('http://188.166.159.80/api/user', {
+            localStorage.setItem("token", token);
+            localStorage.setItem("expiration", expiration);
+            axios
+                .get("http://188.166.159.80/api/user", {
                     headers: {
-                        Authorization: 'Bearer '.concat(this.getToken())
+                        Authorization: "Bearer ".concat(this.getToken())
                     }
                 })
                 .then(response => {
-                    localStorage.setItem('user_id', response.data.id);
+                    console.log(response);
+                    localStorage.setItem("user_id", response.data.id);
                 })
-                .catch((error) => {
-                    console.log('error ' + error);
+                .catch(error => {
+                    console.log("error " + error);
                 });
         },
         getToken() {
-            var token = localStorage.getItem('token')
-            var expiration = localStorage.getItem('expiration')
+            var token = localStorage.getItem("token");
+            var expiration = localStorage.getItem("expiration");
             if (!token || !expiration) {
-                return null
+                return null;
             }
 
             if (Date.now() > parseInt(expiration)) {
-                this.destroyToken()
-                return null
+                this.destroyToken();
+                return null;
             } else {
-                return token
+                return token;
             }
         },
         destroyToken() {
-            localStorage.removeItem('token')
-            localStorage.removeItem('expiration')
+            localStorage.removeItem("token");
+            localStorage.removeItem("expiration");
         },
         isAuthenticated() {
             if (this.getToken()) {
@@ -40,13 +42,13 @@ export default function (Vue) {
                 return false;
             }
         }
-    }
+    };
 
     Object.defineProperties(Vue.prototype, {
         $auth: {
             get() {
-                return Vue.auth
+                return Vue.auth;
             }
         }
-    })
+    });
 }
