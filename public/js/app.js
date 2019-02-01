@@ -1944,7 +1944,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     fetchTasks: function fetchTasks() {
       var _this = this;
 
-      axios.get("/api/lists/user/" + localStorage.getItem("user_id")).then(function (response) {
+      axios.get("http://188.166.159.80/api/lists/user/" + localStorage.getItem("user_id")).then(function (response) {
         _this.lists = response.data;
 
         if (response.data.lenth > 0) {
@@ -1960,7 +1960,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     addlist: function addlist(newList) {
       var _this2 = this;
 
-      var list2add = axios.post("/api/lists", {
+      var list2add = axios.post("http://188.166.159.80/api/lists", {
         title: newList.title,
         user_id: localStorage.getItem("user_id")
       }).then(function (response) {
@@ -1974,7 +1974,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     },
     deleteListItem: function deleteListItem(id, index) {
       this.$delete(this.lists, index);
-      axios.delete("/api/lists/" + id).then(function (response) {
+      axios.delete("http://188.166.159.80/api/lists/" + id).then(function (response) {
         console.log(response);
       }).catch(function (error) {
         console.log(error.response.data);
@@ -2057,7 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
         username: this.username,
         password: this.password
       };
-      var payload = axios.post("/oauth/token", data).then(function (response) {
+      var payload = axios.post("http://188.166.159.80/oauth/token", data).then(function (response) {
         return response.data;
       }).catch(function (error) {
         console.log(error.response.data);
@@ -2230,7 +2230,7 @@ __webpack_require__.r(__webpack_exports__);
         this.alert = true;
       } else {
         this.alert = false;
-        var register = axios.post("/api/register", {
+        var register = axios.post("http://188.166.159.80/api/register", {
           name: this.name,
           email: this.email,
           password: this.password
@@ -2303,7 +2303,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     markDone: function markDone() {
       this.todoItem.done = !this.todoItem.done;
-      axios.put("/api/tasks/" + this.todoItem.id, {
+      axios.put("http://188.166.159.80/api/tasks/" + this.todoItem.id, {
         title: this.todoItem.title,
         done: this.todoItem.done
       }).then(function (response) {
@@ -2324,7 +2324,7 @@ __webpack_require__.r(__webpack_exports__);
       this.todoItem.title = this.tempValue;
       this.disableEditing(); // However we want to save it to the database
 
-      axios.put("/api/tasks/" + this.todoItem.id, {
+      axios.put("http://188.166.159.80/api/tasks/" + this.todoItem.id, {
         title: this.todoItem.title,
         done: this.todoItem.done
       }).then(function (response) {
@@ -2391,7 +2391,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     fetchTasks: function fetchTasks() {
       var _this = this;
 
-      axios.get("/api/tasks").then(function (response) {
+      axios.get("http://188.166.159.80/api/tasks").then(function (response) {
         _this.todos = response.data;
       }).catch(function (error) {
         console.log(error);
@@ -2399,7 +2399,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     },
     deleteTask: function deleteTask(index, id) {
       this.$delete(this.todos, index);
-      axios.delete("/api/tasks/" + id).then(function (response) {
+      axios.delete("http://188.166.159.80/api/tasks/" + id).then(function (response) {
         console.log(response);
       }).catch(function (error) {
         console.log(error.response.data);
@@ -2408,7 +2408,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
     addtask: function addtask(newTask) {
       var _this2 = this;
 
-      var newTaskToAdd = axios.post("/api/tasks", {
+      var newTaskToAdd = axios.post("http://188.166.159.80/api/tasks", {
         title: newTask.title,
         done: newTask.done,
         list_id: newTask.list_id
@@ -54717,21 +54717,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = (function (Vue) {
   Vue.auth = {
     setToken: function setToken(token, expiration) {
-      localStorage.setItem('token', token);
-      localStorage.setItem('expiration', expiration);
-      axios.get('http://localhost:8000/api/user', {
+      localStorage.setItem("token", token);
+      localStorage.setItem("expiration", expiration);
+      axios.get("http://188.166.159.80/api/user", {
         headers: {
-          Authorization: 'Bearer '.concat(this.getToken())
+          Authorization: "Bearer ".concat(this.getToken())
         }
       }).then(function (response) {
-        localStorage.setItem('user_id', response.data.id);
+        console.log(response);
+        localStorage.setItem("user_id", response.data.id);
       }).catch(function (error) {
-        console.log('error ' + error);
+        console.log("error " + error);
       });
     },
     getToken: function getToken() {
-      var token = localStorage.getItem('token');
-      var expiration = localStorage.getItem('expiration');
+      var token = localStorage.getItem("token");
+      var expiration = localStorage.getItem("expiration");
 
       if (!token || !expiration) {
         return null;
@@ -54745,8 +54746,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     destroyToken: function destroyToken() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('expiration');
+      localStorage.removeItem("token");
+      localStorage.removeItem("expiration");
     },
     isAuthenticated: function isAuthenticated() {
       if (this.getToken()) {

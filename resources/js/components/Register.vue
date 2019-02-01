@@ -89,7 +89,7 @@ export default {
         this.alert = false;
 
         let register = axios
-          .post("/api/register", {
+          .post("http://188.166.159.80/api/register", {
             name: this.name,
             email: this.email,
             password: this.password
